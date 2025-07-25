@@ -10,6 +10,26 @@ To ensure secure access, I have configured **inbound rules** in the associated *
 
 > *Inbound rule setup in AWS allowing access to port 5432 (PostgreSQL) only from a specific IP address.*
 
+
+## 1. Populating the Database with Data
+
+To populate the database, I use the Sakila dataset available on GitHub:  
+🔗 [jOOQ/sakila](https://github.com/jOOQ/sakila)
+
+![SQL scripts in GitHub repo](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_2.png)
+
+
+Since **Amazon RDS** does not grant superuser privileges, certain SQL commands like:
+
+```sql
+ALTER TABLE language DISABLE TRIGGER ALL;
+ALTER TABLE language ENABLE TRIGGER ALL;
+```
+
+must be removed. This means all data inserts must be performed with full integrity checks enabled.
+
+
+
 ---
 This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
 
