@@ -1,8 +1,14 @@
-# cs-data-modeling
-Modeling data using PostgreSQL hosted on Amazon RDS
+# Case Study: Remodeling Data Using PostgreSQL Hosted on Amazon RDS
 
+In this case study, I will remodel data from the popular **Sakila** dataset. The dataset will first be **denormalized** to simulate a real-world messy data scenario, and then **normalized** again to demonstrate data modeling techniques.
 
+I'm using the **AWS Free Tier** of Amazon RDS with **PostgreSQL**, without Multi-AZ deployment. The database is managed and accessed using **pgAdmin 4**, installed locally on my private workstation.
 
+To ensure secure access, I have configured **inbound rules** in the associated **Security Group** to only allow traffic from my **office IP address**. This minimizes the exposure of the database to unauthorized access.
+
+![Inbound rule configuration for PostgreSQL access](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_1.png)
+
+> *Inbound rule setup in AWS allowing access to port 5432 (PostgreSQL) only from a specific IP address.*
 
 ---
 This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
