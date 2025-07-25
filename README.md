@@ -4,9 +4,8 @@ Modeling data using PostgreSQL hosted on Amazon RDS
 
 
 
-
-
-This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/jOOQ) project, which is licensed under the **BSD 2-Clause License**.
+---
+This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
 
 ---
 
