@@ -28,6 +28,37 @@ ALTER TABLE language ENABLE TRIGGER ALL;
 
 must be removed. This means all data inserts must be performed with full integrity checks enabled.
 
+## 2. Creating denormalized data model.
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Denormalized Table</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="4">
+        <img src="https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_3.png" alt="Denormalized Table Image" width="300">
+      </td>
+      <td>
+        Using the SQL script found 
+        <a href="https://github.com/KamilKozera/cs-data-modeling/blob/main/sql-scripts/denormalize-scripts/denormalize.sql">here</a>,
+        a single, denormalized table named <code>denormalized_table</code> was constructed. To accelerate the creation of this complex, intentionally flawed starting point, a Generative AI was leveraged to produce the baseline script. Specifically, it contains the following known issues that we will resolve:
+      </td>
+    </tr>
+    <tr>
+      <td><strong>1NF Violation:</strong> The <code>actors_list</code> and <code>special_features</code> columns contain non-atomic, multi-valued data.</td>
+    </tr>
+    <tr>
+      <td><strong>2NF Violation:</strong> With a composite primary key of (<code>inventory_id</code>, <code>customer_id</code>, <code>rental_date</code>), columns like <code>film_title</code> (dependent only on <code>inventory_id</code>) and <code>customer_first_name</code> (dependent only on <code>customer_id</code>) represent partial dependencies.</td>
+    </tr>
+    <tr>
+      <td><strong>3NF Violation:</strong> The table contains transitive dependencies, such as <code>customer_country</code> being dependent on the non-key attribute <code>customer_city</code>.</td>
+    </tr>
+  </tbody>
+</table>
 
 
 ---
