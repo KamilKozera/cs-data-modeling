@@ -60,6 +60,24 @@ must be removed. This means all data inserts must be performed with full integri
   </tbody>
 </table>
 
+## 3. Transforming the relation into First Normal Form (1NF)
+
+To normalize the relation to 1NF, the relation must satisfy following conditions:
+- each row is unique (in our case this condition is already satisfied)
+- there are no reapiting groups of columns (this contition is also satisfied)
+- **all attribute values are atomic (indivisible) - not satisfied**
+
+Columns <code>actors_list</code> and <code>special_features</code> contain data that fails to meet one of the conditions - indivisibility.
+
+actors_list |  special_features
+:-:|:-:
+![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_5.png)  | ![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_6.png)
+
+
+![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_4.png)
+
+
+
 
 ---
 This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
