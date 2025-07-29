@@ -1,4 +1,4 @@
-# Case Study: Remodeling Data Using PostgreSQL Hosted on Amazon RDS
+<img width="1491" height="314" alt="image" src="https://github.com/user-attachments/assets/610181d3-e92d-4593-81f5-32289e497fe6" /># Case Study: Remodeling Data Using PostgreSQL Hosted on Amazon RDS
 
 In this case study, I will remodel data from the popular **Sakila** dataset. The dataset will first be **denormalized** to simulate a real-world messy data scenario, and then **normalized** again to demonstrate data modeling techniques.
 
@@ -63,9 +63,9 @@ must be removed. This means all data inserts must be performed with full integri
 ## 3. Transforming the relation into First Normal Form (1NF)
 
 To normalize the relation to 1NF, the relation must satisfy following conditions:
-- each row is unique (in our case this condition is already satisfied)
-- there are no reapiting groups of columns (this contition is also satisfied)
-- **all attribute values are atomic (indivisible) - not satisfied**
+- Each row is unique. (**Satisfied**)
+- There are no repeating groups of columns (**Satisfied**)
+- All attribute values are atomic (indivisible) - (**Not satisfied**)
 
 Columns <code>actors_list</code> and <code>special_features</code> contain data that fails to meet one of the conditions - indivisibility.
 
@@ -73,11 +73,23 @@ actors_list |  special_features
 :-:|:-:
 ![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_5.png)  | ![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_6.png)
 
+To achieve First Normal Form, the non-atomic columns were resolved by creating two new tables: <code>film_actors</code> and <code>film_features</code>. In the <code>film_actors</code> table, a composite primary key of (<code>film_id</code>, <code>actor_name</code> was established to ensure each row is unique. Similarly, the <code>film_features</code> table uses a composite primary key of (<code>film_id</code>, <code>special_feature</code>) to guarantee uniqueness for each film-feature combination.
 
 ![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_4.png)
 
+At this point, all three of my tables are in 1NF. Notice that I have not yet added any foreign keys. My only goal was to fix the atomicity problem. The tables are now structurally sound, but the database doesn't yet enforce the relationships between them. We will address that in the next step.
 
+## 4. Transforming the relations into Second Normal Form (2NF)
 
+To normalize the relation to 2NF, the relation must satisfy following conditions:
+- The relation must already be in First Normal Form (1NF). (**Satisfied**)
+- The relation must have no partial dependencies. This means every non-key attribute must be fully functionally dependent on the *entire* primary key. (**Not Satisfied**)
+
+### Identifying the Partial Dependencies
+
+A partial dependency exists because our table uses a composite primary key: (<code>inventory_id</code>, <code>customer_id</code>, <code>rental_date</code>). We have two groups of attributes that violate the 2NF rule:
+1. **Customer-related attributes**: Columns like <code>customer_first_name</code>, <code>customer_last_name</code>, <code>customer_email</code>, <code>customer_address</code>, <code>customer_city</code> and <code>customer_country</code> are dependent only on <code>customer_id</code>, which is just one part of the primary key.
+2. **Film-related attributes**: Columns like <code>film_title</code>, <code>film_category</code> and <code>film_rating</code> are dependent only on <code>inventory_id</code>, another part of the primary key. The film's title does not change based on the customer or the rental date.
 
 ---
 This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
