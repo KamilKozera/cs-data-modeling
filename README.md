@@ -1,4 +1,4 @@
-<img width="1491" height="314" alt="image" src="https://github.com/user-attachments/assets/610181d3-e92d-4593-81f5-32289e497fe6" /># Case Study: Remodeling Data Using PostgreSQL Hosted on Amazon RDS
+# Case Study: Remodeling Data Using PostgreSQL Hosted on Amazon RDS
 
 In this case study, I will remodel data from the popular **Sakila** dataset. The dataset will first be **denormalized** to simulate a real-world messy data scenario, and then **normalized** again to demonstrate data modeling techniques.
 
