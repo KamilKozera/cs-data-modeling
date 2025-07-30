@@ -95,7 +95,7 @@ A partial dependency exists because our table uses a composite primary key: (<co
 
 To normalize all the relations to **Second Normal Form**, three additional tables were created <code>inventory</code>, <code>customers</code> and <code>films</code>. On top of that, the table <code>normalized_to_1NF</code> was renamed to <code>rentals</code>. The <code>inventory</code> table was created to link renatals table with the tables that have <code>film_id</code> as a primary key. This was done because <code>inventory_id</code> in <code>rentals</code> table describes copies that are rented out. There can be multiple copies of the same film. On top of that, new primary surrogate key <code>rental_id</code> was added to <code>rentals</code> table.
 
-Performed modifications made the data model less redundant and less prone to update and deletion anomalies. For example, before the modifications if there was a need to change the film title in rentals, then the title would be needed to be modified in every copy that existed making the data model more prone to update and deletion anomalies.
+Achieving Second Normal Form delivers immediate and substantial benefits by eliminating the data redundancy caused by partial dependencies. This directly resolves the risk of update and deletion anomalies that were present in the 1NF model. For example, changing a film's title previously required finding and modifying every single rental record associated with that film - a process prone to error. Now, it is a single, safe update in one location within the films table. This principle extends to all customer and film information, making the entire data model significantly more efficient, reliable, and easier to maintain.
 
 ### Foreign key constraints
 
