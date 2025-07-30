@@ -89,7 +89,19 @@ To normalize the relation to 2NF, the relation must satisfy following conditions
 
 A partial dependency exists because our table uses a composite primary key: (<code>inventory_id</code>, <code>customer_id</code>, <code>rental_date</code>). We have two groups of attributes that violate the 2NF rule:
 1. **Customer-related attributes**: Columns like <code>customer_first_name</code>, <code>customer_last_name</code>, <code>customer_email</code>, <code>customer_address</code>, <code>customer_city</code> and <code>customer_country</code> are dependent only on <code>customer_id</code>, which is just one part of the primary key.
-2. **Film-related attributes**: Columns like <code>film_title</code>, <code>film_category</code> and <code>film_rating</code> are dependent only on <code>inventory_id</code>, another part of the primary key. The film's title does not change based on the customer or the rental date.
+2. **Film-related attributes**: Columns like <code>film_title</code>, <code>film_category</code> and <code>film_rating</code> are dependent only on <code>inventory_id</code>, another part of the primary key.
+
+### Creating new tables
+
+To normalize all the relations to **Second Normal Form**, three additional tables were created <code>inventory</code>, <code>customers</code> and <code>films</code>. On top of that, the table <code>normalized_to_1NF</code> was renamed to <code>rentals</code>. The <code>inventory</code> table was created to link renatals table with the tables that have <code>film_id</code> as a primary key. This was done because <code>inventory_id</code> in <code>rentals</code> table describes copies that are rented out. There can be multiple copies of the same film. On top of that, new primary surrogate key <code>rental_id</code> was added to <code>rentals</code> table.
+
+Performed modifications made the data model less redundant and less prone to update and deletion anomalies. For example, before the modifications if there was a need to change the film title in rentals, then the title would be needed to be modified in every copy that existed making the data model more prone to update and deletion anomalies.
+
+### Foreign key constraints
+
+
+
+![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_7.png)
 
 ---
 This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
