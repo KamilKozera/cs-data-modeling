@@ -97,9 +97,6 @@ To normalize all the relations to **Second Normal Form**, three additional table
 
 Achieving Second Normal Form delivers immediate and substantial benefits by eliminating the data redundancy caused by partial dependencies. This directly resolves the risk of update and deletion anomalies that were present in the 1NF model. For example, changing a film's title previously required finding and modifying every single rental record associated with that film - a process prone to error. Now, it is a single, safe update in one location within the films table. This principle extends to all customer and film information, making the entire data model significantly more efficient, reliable, and easier to maintain.
 
-### Foreign key constraints
-
-
 
 ![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_7.png)
 
