@@ -122,7 +122,10 @@ To create a more reliable and less redundant model, the <code>film_features</cod
 
 With this final change, the data model is significantly improved. If the name of the "Behind the Scenes" feature needs to be updated, the modification is now required in only one single location: the corresponding row in the new features table. This eliminates the risk of update anomalies and ensures greater data integrity.
 
-![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_8.png)
+<p align="center">
+  <img src="https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_8.png" />
+</p>
+
 
 ---
 This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
