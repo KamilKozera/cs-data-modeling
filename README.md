@@ -55,7 +55,7 @@ must be removed. This means all data inserts must be performed with full integri
       <td><strong>2NF Violation:</strong> With a composite primary key of (<code>inventory_id</code>, <code>customer_id</code>, <code>rental_date</code>), columns like <code>film_title</code> (dependent only on <code>inventory_id</code>) and <code>customer_first_name</code> (dependent only on <code>customer_id</code>) represent partial dependencies.</td>
     </tr>
     <tr>
-      <td><strong>3NF Violation:</strong> The table contains transitive dependencies, such as <code>customer_country</code> being dependent on the non-key attribute <code>customer_city</code>.</td>
+      <td><strong>3NF Violation:</strong> The table does not contain transitive dependencies.</td>
     </tr>
   </tbody>
 </table>
@@ -100,10 +100,32 @@ Achieving Second Normal Form delivers immediate and substantial benefits by elim
 
 ![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_7.png)
 
----
-This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
+## 5. Transforming the relations into Third Normal Form (3NF)
+
+To normalize the relation to 3NF, the relation must satisfy following conditions:
+- The relation must already be in Second Normal Form (2NF). (**Satisfied**)
+- The relation must have no transitive dependencies. A transitive dependency exists when a non-key attribute (B) is dependent on another non-key attribute (C), which is in turn dependent on the primary key (A). In simpler terms, a non-key attribute depends on another non-key attribute, which indirectly depends on the primary key.  (**Satisfied**)
+
+The data model is already normalized into **Third Normal Form**.
+
+## 6. Further optimalizations.
+
+A final review of the data model reveals an opportunity for further optimization in the <code>film_features</code> table.<br>
+
+Currently, if the name of a special feature were to change - for instance, from "Behind the Scenes" to "The Making Of" - the <code>special_feature</code> attribute would need to be updated in every row where "Behind the Scenes" is present. This design is prone to update anomalies and data inconsistency.
+
+
+To create a more reliable and less redundant model, the <code>film_features</code> table is decomposed into two distinct relations:<br>
+
+- <code>features</code>: A new master table to hold the authoritative list of feature names. It uses <code>feature_id</code> as its primary key.
+- <code>film_features</code>: A revised linking table that now uses <code>feature_id</code> as a foreign key, alongside <code>film_id</code>.
+
+With this final change, the data model is significantly improved. If the name of the "Behind the Scenes" feature needs to be updated, the modification is now required in only one single location: the corresponding row in the new features table. This eliminates the risk of update anomalies and ensures greater data integrity.
+
+![](https://github.com/KamilKozera/cs-data-modeling/blob/main/png-files/file_8.png)
 
 ---
+This case study includes SQL scripts derived from the [jOOQ Object Oriented Querying](https://github.com/jOOQ/sakila) project, which is licensed under the **BSD 2-Clause License**.
 
 **Copyright (c) 2021, jOOQ Object Oriented Querying**  
 All rights reserved.
